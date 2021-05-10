@@ -73,19 +73,20 @@ export class ClientsComponent implements OnInit {
         this.mtitle = "Update Cliente";
         this.mode = false;
         this.modalservice.open(modal);
-        this.form.patchValue({
-            clientId: data.clientId,
-            userName: data.userName,
-            lastName: data.lastName,
-            cellphone: data.cellphone,
-            address: data.address,
-            password: data.password,
-            email: data.email,
-            state: data.state,
-            zone: data.zone
-        })
-
-        this.current = data;
+        setTimeout(() => {
+            this.form.patchValue({
+                clientId: data.clientId,
+                userName: data.userName,
+                lastName: data.lastName,
+                cellphone: data.cellphone,
+                address: data.address,
+                password: data.password,
+                email: data.email,
+                state: data.state,
+                zone: data.zone
+            })
+            this.current = data;
+        }, 150)
     }
 
     create(modal){
@@ -403,20 +404,20 @@ export class ClientsComponent implements OnInit {
                     let data = JSON.parse(res_data.data)
                     data.forEach((x) => {
                         this.clientservice.create(x).subscribe((res: any) => {
-                            if(res.success){
-                                alert("Data imported successfully!")
-
-                                setTimeout(() => {
-                                    this.modalservice.dismissAll()
-                                    this.getAll();
-                                    
-                                }, 150);
-                            }
-                            else{
+                            if(!res.success){
                                 alert("Failed to insert data, contact with an admin!")
+                                return;
                             }
                         })
                     })
+
+                    alert("Data imported successfully!")
+
+                    setTimeout(() => {
+                        this.modalservice.dismissAll()
+                        this.getAll();
+                        
+                    }, 150);
                 }else{
                     alert("Check your file and format or contact with an admin!")
                 }
