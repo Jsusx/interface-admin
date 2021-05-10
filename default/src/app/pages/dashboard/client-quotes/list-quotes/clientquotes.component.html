@@ -1,0 +1,46 @@
+<button class="btn-custom" [routerLink]="['../new']" *ngIf="userdata.usertype == 'admin' || userdata.usertype == 'quote'"><i class="ti-plus"></i> New</button>
+<table class="table user-data" *ngIf="userdata.usertype == 'admin' || userdata.usertype == 'quote'">
+    <thead>
+        <th>Quote Number</th>
+        <th>Name</th>
+        <th>State</th>
+        <th>Actions</th>
+    </thead>
+    <tbody *ngIf="data">
+        <tr *ngFor="let d of data">
+            <td>{{ d.num }}</td>
+            <td>{{ d.name }}</td>
+            <td><input type="checkbox" [checked]="d.state == 1" (change)="changeState($event, d)"></td>
+            <td>
+                <button class="btn-icon"><a [attr.href]="d.url" target="_blank" download><i class="ti-download"></i></a></button>
+                <button class="btn-icon settings" [routerLink]="['../settings/'+d.quoteid]"><i class="ti-settings"></i></button>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<div *ngIf="userdata.usertype == 'client'">
+    <table class="table user-data" *ngIf="client_quotes.length > 1 else clientquotes_empty">
+        <thead>
+            <th>Quote Number</th>
+            <th>Name</th>
+            <th *ngIf="userdata.usertype == 'admin' || userdata.usertype == 'quote'">State</th>
+            <th>Actions</th>
+        </thead>
+        <tbody>
+            <tr *ngFor="let d of client_quotes">
+                <td>{{ d.num }}</td>
+                <td>{{ d.name }}</td>
+                <td>
+                    <button class="btn-icon"><a [attr.href]="d.url" target="_blank" download><i class="ti-download"></i></a></button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <ng-template #clientquotes_empty>
+        <div class="data-empty">
+            <hr>
+            <h4 class="empty-text">No data found</h4>
+            <hr>
+        </div>
+    </ng-template>
+</div>

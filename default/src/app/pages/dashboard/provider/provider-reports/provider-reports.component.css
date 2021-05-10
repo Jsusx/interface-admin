@@ -1,0 +1,118 @@
+/*
+TABLE
+*/
+.user-data{
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, .2);
+}
+
+.user-data thead{
+    background-color: #303549;
+    color: white;
+    text-align: center;
+}
+.user-data thead th{
+    border-bottom: none;
+}
+
+.user-data thead th:first-child{
+    border-radius: 5px 0 0 0;
+}
+
+.user-data thead th:last-child{
+    border-radius: 0 5px 0 0;
+}
+
+.user-data tbody td{
+    background-color: white;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.btn-actions{
+    background-color: inherit;
+    color: #303549;
+    border: none;
+    outline: none;
+    margin-right: 5px;
+}
+
+.btn-actions.delete{
+    color: #ff4848;
+}
+
+.input{
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    outline: none;
+    cursor: pointer;
+    transition: 0.5s;
+}
+
+.input:focus, .input:hover, .input:active{
+    border: 1px solid #303549;
+}
+
+
+
+/*
+FIND
+*/
+
+.search-group{
+    width: 100%;
+    background-color: white;
+    border: 10px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, .2);
+}
+
+.search-title{
+    width: 100%;
+    padding: 15px;
+    display: block;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    background-color: #303549;
+    color: white;
+}
+
+.data-empty{
+    background-color: white;
+    padding: 15px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+/*
+BTN
+*/
+
+.btn-custom{
+    background-color: #303549;
+    color: white;
+    border: none;
+    outline: none;
+    padding: 8px;
+    transition: 0.5s;
+    margin-bottom: 15px;
+}
+
+.btn-custom:disabled{
+    background-color: #b6b6b6;
+    color: white;
+}
+
+.btn-custom:disabled:hover{
+    background-color: #929292;
+    color: white;
+}
+
+.btn-custom.selected{
+    background-color: #48ffa3;
+}
+
+.btn-custom:hover{
+    background-color: #404761;
+}

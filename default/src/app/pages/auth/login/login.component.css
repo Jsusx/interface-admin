@@ -1,0 +1,63 @@
+
+
+.bg-auth{
+    background-image: url('/assets/img/bg.jpg');
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+.auth-form{
+    width: 350px;
+    background-color: white;
+    position: fixed;
+    padding: 20px;
+    top: 50%;
+    left: 50%;
+    border-radius: 10px;
+    transform: translate(-50%, -50%);
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+.auth-form-group{
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.auth-input{
+    width: 100%;
+    padding: 8px;
+    border: none;
+    border: 1px solid #ccc;
+    outline: none;
+    transition: 0.5s;
+}
+
+.auth-input:focus{
+    outline: none;
+    border: 1px solid #303549;
+    /*
+    border: 1px solid rgba(23, 131, 255);
+    box-shadow: -1px 1px 10px rgba(23, 131, 255, 0.5);
+    */
+}
+
+.btn-sign-in{
+    width: 100%;
+    color: white;
+    background-color: #2164f3;
+    padding: 10px;
+    border: none;
+    outline: none;
+    transition: 0.5s;
+}
+
+.btn-sign-in:hover{
+    background-color: #1f5bdb;
+}
+
+.btn-sign-in:disabled{
+    background-color: #ccc;
+}

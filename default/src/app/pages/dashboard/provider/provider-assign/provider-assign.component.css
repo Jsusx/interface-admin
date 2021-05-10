@@ -1,0 +1,182 @@
+/*
+MODAL
+*/
+
+.modal-header{
+    background-color: #303549;
+    color: white;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.modal-title{
+    font-size: 20px;
+    width: 100%;
+    text-align: center;
+}
+
+.modal-close{
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 30px;
+    text-align: center;
+    height: 30px;
+    background-color: inherit;
+    transition: 0.5s;
+}
+
+.modal-close:hover{
+    color: #ff4848;
+}
+
+.input{
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    outline: none;
+    transition: 0.5s;
+}
+
+.input:focus, .input:hover, .input:active{
+    border: 1px solid #303549;
+}
+
+
+/*
+TABLE
+*/
+
+.user-data{
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, .2);
+}
+
+.user-data thead{
+    background-color: #303549;
+    color: white;
+    text-align: center;
+}
+.user-data thead th{
+    border-bottom: none;
+}
+
+.user-data thead th:first-child{
+    border-radius: 5px 0 0 0;
+}
+
+.user-data thead th:last-child{
+    border-radius: 0 5px 0 0;
+}
+
+.user-data tbody td{
+    background-color: white;
+    text-align: center;
+}
+
+/*
+BTN
+*/
+
+.btn-assign{
+    background-color: #303549;
+    color: white;
+    border: none;
+    outline: none;
+    padding: 8px;
+    transition: 0.5s;
+    margin-bottom: 15px;
+}
+
+.btn-assign:disabled{
+    background-color: #b6b6b6;
+    color: white;
+}
+
+.btn-assign:disabled:hover{
+    background-color: #929292;
+    color: white;
+}
+
+.btn-assign.selected{
+    background-color: #48ffa3;
+}
+
+.btn-assign:hover{
+    background-color: #404761;
+}
+
+/*
+USER
+*/
+
+.client-img{
+    width: 150px;
+    height: 150px;
+    position: relative;
+    border: 1px solid #ccc;
+    background-color: #303549;
+    overflow: hidden;
+    border-radius: 50%;
+    margin: auto;
+}
+
+.clienticon{
+    position: absolute;
+    font-size: 100px;
+    top: 50%;
+    color: white;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/*
+STATS
+*/
+
+.data-stats{
+    background-color: white;
+    position: relative;
+    width: 290px;
+    height: 150px;
+    padding: 10px;
+    margin-bottom: 30px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, .1);
+}
+
+.stats-icon{
+    position: absolute;
+    top: -15px;
+    left: 15px;
+    font-size: 30px;
+    text-align: center;
+    width: 60px;
+    overflow: hidden;
+    background-color: #404761;
+    padding: 8px;
+    border-radius: 10px;
+    color: white;
+    transition: 0.5s;
+}
+
+
+.data-stats:hover .stats-icon{
+    top: -25px;
+}
+
+.stats-title{
+    font-size: 15px;
+    font-weight: bold;
+    display: block;
+    text-align: right;
+    margin-top: 15px;
+}
+
+.stats-number{
+    font-size: 50px;
+    display: block;
+    text-align: right;
+    font-weight: lighter;
+    margin-top: 15px;
+}

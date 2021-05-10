@@ -1,0 +1,259 @@
+<ng-template #modalnotes let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">{{ mtitle }}</h4>
+        <button type="button" class="modal-close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true"><i class="ti-close"></i></span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <form action="">
+            <div class="form-group">
+                <label for="">Note</label>
+                <textarea placeholder="Write your note!" cols="15" rows="5" class="input" [(ngModel)]="client_note" [ngModelOptions]="{ standalone: true }"></textarea>
+            </div>
+        </form>
+        <button class="btn-custom mr-2" type="button" (click)="saveNote()">Save</button>
+        <button class="btn-custom cancel" type="button" (click)="modal.dismiss('Cross click')">Cancel</button>
+    </div>
+</ng-template>
+<ng-template #importdata let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">{{ mtitle }}</h4>
+        <button type="button" class="modal-close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true"><i class="ti-close"></i></span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="form-group">
+            <label for="">Your file</label>
+            <div class="drag-zone">
+                <div class="file-group">
+                    <div class="file-img">
+                        <span class="file-img-icon">
+                            <i class="ti-file" [class]="{ 'ti-file': file.type, 'ti-image': !file.type }"></i>
+                        </span>
+                    </div>
+                    <div class="file-body">
+                        <span class="file-name">{{ file.name }}</span>
+                    </div>
+                </div>
+                <span class="drop-icon"><i class="ti-upload"></i></span>
+            </div>
+            <div class="form-group d-none">
+                <input type="file" (change)="changeFile($event)" id="files">
+            </div>
+        </div>
+        <button class="btn-custom w-100" [disabled]="!this.files" (click)="importData()">Import</button>
+    </div>
+</ng-template>
+<ng-template #modal let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">{{ mtitle }}</h4>
+        <button type="button" class="modal-close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true"><i class="ti-close"></i></span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <form action="" [formGroup]="form" (submit)="submit()" autocomplete="off">
+            <div class="form-group d-none">
+                <label for="">id</label>
+                <input type="text" formControlName="clientId" class="input">
+            </div>
+            <div class="form-group">
+                <label for="">UserName</label>
+                <input type="text" formControlName="userName" class="input">
+            </div>
+            <div class="form-group">
+                <label for="">LastName</label>
+                <input type="text" formControlName="lastName" class="input">
+            </div>
+            <div class="row">
+                <div class="col-lg">
+                    <div class="form-group">
+                        <label for="">Email</label>
+                        <input type="email" formControlName="email" class="input">
+                        <span class="d-block text-danger" *ngIf="this.form.get('email').errors?.email">Invalid Email</span>
+                    </div>
+                </div>
+                <div class="col-lg" *ngIf="mode">
+                    <div class="form-group">
+                        <label for="">Password</label>
+                        <input type="password" formControlName="password" class="input">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="form-group">
+                        <label for="">CellPhone</label>
+                        <input type="text" formControlName="cellphone" class="input">
+                    </div>
+                </div>
+                <div class="col">
+                    <label for="">State</label>
+                    <select formControlName="state" class="input">
+                        <option value="-1" selected>Select state</option>
+                        <option value="Marketing">Marketing</option>
+                        <option value="Assigned">Assigned</option>
+                        <option value="In Process">In Process</option>
+                        <option value="Concluded">Concluded</option>
+                        <option value="Not Worked">Not Worked</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="">Zone</label>
+                <select formControlName="zone" class="input">
+                    <option value="-1" selected>Select zone</option>
+                    <option *ngFor="let z of zones" [attr.value]="z">{{ z }}</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="">Address</label>
+                <input type="text" formControlName="address" class="input">
+            </div>
+            <div class="d-flex justify-content-center mt-4">
+                <button type="submit" class="btn-submit" [disabled]="form.invalid || form.value.state == '-1' || form.value.zone == '-1'">Save</button>
+                <!--<button type="button" class="btn btn-outline-dark w-100" (click)="modal.close('Save click')">Cancelar</button>-->
+            </div>
+        </form>
+    </div>
+</ng-template>
+<div class="search-group">
+    <span class="search-title">Find a client</span>
+    <!--
+    <div class="form-group pt-3 pb-3 p-3">
+        <div class="row">
+            <div class="col">
+                <input type="text" class="input" [(ngModel)]="search_client.text" [ngModelOptions]="{ standalone: true }" placeholder="{{ search_client.type == '-1' ? 'Select search type': search_client.type == 'Username' ? 'Search client by username' : search_client.type == 'Address' ? 'Search client by address':'Search client by zone' }}" [disabled]="search_client.type == '-1'" (input)="searchClient($event)">
+            </div>
+            <div class="col-3">
+                <select class="input" [(ngModel)]="search_client.type" [ngModelOptions]="{ standalone: true }">
+                    <option value="-1" selected>Search By</option>
+                    <option value="Username">Username</option>
+                    <option value="Address">Address</option>
+                    <option value="Zone">Zone</option>
+                </select>
+            </div>
+        </div>
+    </div>-->
+    <div class="filter-box">
+        <div class="filter-group">
+            <!--<p>Another filtering method:</p>-->
+            <div class="row">
+                <div class="col-lg">
+                    <div class="form-group">
+                        <label for="">Username</label>
+                        <input type="text" class="input" (input)="filterClient($event)" placeholder="Write a username" [(ngModel)]="filter_client.username.text" [ngModelOptions]="{ standalone: true }" [disabled]="!filter_client.username.disabled">
+                    </div>
+                    <div class="d-flex justify-content-start mt-3">
+                        <div class="switch-group" (click)="changeState($event)">
+                            <input type="checkbox" class="input-switch" [checked]="filter_client.username.disabled" (change)="filter_client.username.disabled = !filter_client.username.disabled">
+                            <span class="switch-content"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg">
+                    <div class="form-group">
+                        <label for="">Address</label>
+                        <input type="text" class="input" (input)="filterClient($event)" placeholder="Write an address" [(ngModel)]="filter_client.address.text" [ngModelOptions]="{ standalone: true }" [disabled]="!filter_client.address.disabled">
+                        <div class="d-flex justify-content-start mt-3">
+                            <div class="switch-group" (click)="changeState($event)">
+                                <input type="checkbox" class="input-switch" [checked]="filter_client.address.disabled" (change)="filter_client.address.disabled = !filter_client.address.disabled">
+                                <span class="switch-content"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg">
+                    <div class="form-group">
+                        <label for="">Service Type</label>
+                        <select class="input"  [(ngModel)]="filter_client.serviceType.text" (change)="filterClient($event)" [ngModelOptions]="{ standalone: true }" [disabled]="!filter_client.serviceType.disabled">
+                            <option value="-1" selected>Select the provider service</option>
+                            <option value="impactWindow">Impact Window</option>
+                            <option value="panelSolar">Panel Solar</option>
+                            <option value="marmol">Marmol</option>
+                            <option value="remodeling">Remodeling</option>
+                        </select>
+                        <div class="d-flex justify-content-start mt-3">
+                            <div class="switch-group" (click)="changeState($event)">
+                                <input type="checkbox" class="input-switch" [checked]="filter_client.serviceType.disabled" (change)="filter_client.serviceType.disabled = !filter_client.serviceType.disabled">
+                                <span class="switch-content"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="d-flex justify-content-end">
+                <button class="btn-custom mr-2">Filter</button>
+                <button class="btn-custom" (click)="resetFilter()">Reset</button>
+            </div>
+        </div>
+    </div>
+</div>
+<button class="btn-new" (click)="create(modal)" *ngIf="userdata.usertype == 'admin' || userdata.usertype == 'admin_assistant' || userdata.usertype == 'callcenter'"><i class="ti-plus"></i> New</button>
+<button class="btn-custom ml-2" (click)="importFile(importdata)"><i class="ti-import"></i> Import Data</button>
+<table class="table user-data">
+    <thead>
+        <tr>
+            <th>Email</th>
+            <th>UserName</th>
+            <th>LastName</th>
+            <th>CellPhone</th>
+            <th>Address</th>
+            <ng-container *ngIf="userdata.usertype == 'admin' || userdata.usertype == 'admin_assistant' || 'callcenter'">
+                <th class="bg yellow light">IP</th>
+                <th class="bg green">PS</th>
+                <th class="bg yellow">MM</th>
+                <th class="bg blue">RE</th>
+            </ng-container>
+            <th *ngIf="userdata.usertype == 'admin' || 'callcenter'">Zone</th>
+            <th *ngIf="userdata.usertype == 'admin' || userdata.usertype == 'admin_assistant'">State</th>
+            <th *ngIf="userdata.usertype == 'admin'">Account State</th>
+            <th *ngIf="userdata.usertype == 'admin' || userdata.usertype == 'admin_assistant' || userdata.usertype == 'callcenter'">{{ userdata.usertype == 'callcenter' ? 'Notes':'Actions' }}</th>
+        </tr>
+    </thead>
+    <tbody *ngIf="data">
+        <tr *ngFor="let d of data">
+            <td>{{ d.email }}</td>
+            <td>{{ d.userName }}</td>
+            <td>{{ d.lastName }}</td>
+            <td>{{ d.cellphone }}</td>
+            <td>{{ d.address }}</td>
+            <ng-container *ngIf="userdata.usertype == 'admin' || 'admin_assistant' || userdata.usertype == 'callcenter'">
+                <td>
+                    <div class="switch-group" (click)="changeState($event)">
+                        <input type="checkbox" class="input-switch" data-table="impactWindow" (change)="updateState($event, d)" [checked]="d.impactWindow == 1">
+                        <span class="switch-content"></span>
+                    </div>
+                </td>
+                <td>
+                    <div class="switch-group" (click)="changeState($event)">
+                        <input type="checkbox" class="input-switch" data-table="panelSolar" (change)="updateState($event, d)" [checked]="d.panelSolar == 1">
+                        <span class="switch-content"></span>
+                    </div>
+                </td>
+                <td>
+                    <div class="switch-group" (click)="changeState($event)">
+                        <input type="checkbox" class="input-switch" data-table="marmol" (change)="updateState($event, d)" [checked]="d.marmol == 1">
+                        <span class="switch-content"></span>
+                    </div>
+                </td>
+                <td>
+                    <div class="switch-group" (click)="changeState($event)">
+                        <input type="checkbox" class="input-switch" data-table="remodeling" (change)="updateState($event, d)" [checked]="d.remodeling == 1">
+                        <span class="switch-content"></span>
+                    </div>
+                </td>
+            </ng-container>
+            <td *ngIf="userdata.usertype == 'admin' || 'callcenter'">{{ d.zone }}</td>
+            <td *ngIf="userdata.usertype == 'admin' || userdata.usertype == 'admin_assistant'">{{ d.state }}</td>
+            <td *ngIf="userdata.usertype == 'admin'"><input type="checkbox" [checked]="d.acc_state == 1" data-table="acc_state" (change)="updateState($event, d)" ></td>
+            <td>
+                <button class="btn-actions" (click)="edit(modal, d)" *ngIf="userdata.usertype == 'admin' || userdata.usertype == 'admin_assistant'"><i class="fas fa-pen"></i></button>
+                <button class="btn-actions delete" (click)="delete(d)" *ngIf="userdata.usertype == 'admin' || userdata.usertype == 'admin_assistant'"><i class="fas fa-trash-alt"></i></button>
+                <button class="btn-actions" title="Show Notes" *ngIf="userdata.usertype == 'admin' || userdata.usertype == 'admin_assistant' || userdata.usertype == 'callcenter'" (click)="notes(modalnotes, d)"><i class="fas fa-sticky-note"></i></button>
+            </td>
+        </tr>
+    </tbody>
+</table>

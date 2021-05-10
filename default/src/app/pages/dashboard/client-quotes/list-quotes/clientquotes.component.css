@@ -1,0 +1,94 @@
+/*
+TABLE
+*/
+
+.user-data{
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, .2);
+}
+
+.user-data thead{
+    background-color: #303549;
+    color: white;
+    text-align: center;
+}
+.user-data thead th{
+    border-bottom: none;
+}
+
+.user-data thead th:first-child{
+    border-radius: 5px 0 0 0;
+}
+
+.user-data thead th:last-child{
+    border-radius: 0 5px 0 0;
+}
+
+.user-data tbody td{
+    background-color: white;
+    text-align: center;
+    vertical-align: middle;
+    text-align: center;
+    position: relative;
+}
+
+.data-empty{
+    background-color: white;
+    padding: 15px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+/*
+BTN
+*/
+
+.btn-custom{
+    background-color: #303549;
+    color: white;
+    border: none;
+    outline: none;
+    padding: 8px;
+    transition: 0.5s;
+    margin-bottom: 15px;
+}
+
+.btn-custom:disabled{
+    background-color: #b6b6b6;
+    color: white;
+}
+
+.btn-custom:disabled:hover{
+    background-color: #929292;
+    color: white;
+}
+
+.btn-custom.selected{
+    background-color: #48ffa3;
+}
+
+.btn-custom:hover{
+    background-color: #404761;
+}
+
+
+.btn-icon{
+    background-color: inherit;
+    border: none;
+    outline: none;
+    transition: 0.7s;
+}
+
+.btn-icon a{
+    text-decoration: none;
+    color: #404761;
+    transition: 0.7s;
+}
+
+.btn-icon a:hover{
+    color: #ff4848;
+}
+
+.btn-icon.settings:hover{
+    color: #ff4848;
+    transform: rotate(30deg);
+}

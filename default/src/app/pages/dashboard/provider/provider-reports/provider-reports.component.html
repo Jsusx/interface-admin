@@ -1,0 +1,51 @@
+<div class="search-group">
+    <span class="search-title">Provider Filter</span>
+    <div class="form-group pt-3 pb-3 p-3">
+        <select [(ngModel)]="provider.type" [ngModelOptions]="{ standalone: true }" (change)="filter($event)" class="input">
+            <option value="-1" selected>Select the provider state</option>
+            <option value="Assignment">Assignment</option>
+            <option value="Quotation">Quotation</option>
+            <option value="Acceptance">Acceptance</option>
+            <option value="Process Concluded">Process Concluded</option>
+            <option value="Denial">Denial</option>
+        </select>
+        <div class="d-flex justify-content-end">
+            <button class="btn-custom mt-3" (click)="getData()">Reset Filter</button>
+        </div>
+    </div>
+</div>
+<table class="table user-data" *ngIf="data.length > 0 else nodata">
+    <thead>
+        <th>Company</th>
+        <th>ServiceType</th>
+        <th>Email</th>
+        <th>CellPhone</th>
+        <th>Address</th>
+        <th>Manager Or Owner</th>
+        <th>Operational Staff</th>
+        <th>Commission Established</th>
+        <th>Account State</th>
+        <th>State</th>
+    </thead>
+    <tbody>
+        <tr *ngFor="let d of data">
+            <td>{{ d.company }}</td>
+            <td>{{ d.serviceType }}</td>
+            <td>{{ d.email }}</td>
+            <td>{{ d.cellphone }}</td>
+            <td>{{ d.address }}</td>
+            <td>{{ d.managerOrOwner }}</td>
+            <td>{{ d.operationalStaff }}</td>
+            <td>{{ d.commissionEstablished }}</td>
+            <td>{{ d.acc_state == '1' ? 'Active':'Inactive' }}</td>
+            <td>{{ d.provider_state }}</td>
+        </tr>
+    </tbody>
+</table>
+<ng-template #nodata>
+    <div class="data-empty">
+        <hr>
+        <h4 class="empty-text">No data found</h4>
+        <hr>
+    </div>
+</ng-template>

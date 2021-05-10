@@ -1,0 +1,633 @@
+<ng-template #modal let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">{{ mtitle }}</h4>
+        <button type="button" class="modal-close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true"><i class="ti-close"></i></span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div *ngIf="userdata">
+            <div *ngIf="userdata.usertype == 'client'">
+                <form action="" [formGroup]="formClient" (submit)="submit()" autocomplete="off">
+                    <div class="form-group d-none">
+                        <label for="">id</label>
+                        <input type="text" formControlName="clientId" class="input">
+                    </div>
+                    <div class="form-group">
+                        <label for="">UserName</label>
+                        <input type="text" formControlName="userName" class="input">
+                    </div>
+                    <div class="form-group">
+                        <label for="">LastName</label>
+                        <input type="text" formControlName="lastName" class="input">
+                    </div>
+                    <div class="row">
+                        <div class="col-lg">
+                            <div class="form-group">
+                                <label for="">Email</label>
+                                <input type="email" formControlName="email" class="input">
+                                <span class="d-block text-danger" *ngIf="this.formClient.get('email').errors?.email">Invalid Email</span>
+                            </div>
+                        </div>
+                        <div class="col-lg">
+                            <div class="form-group">
+                                <label for="">Password</label>
+                                <input type="password" formControlName="password" class="input">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="">CellPhone</label>
+                        <input type="text" formControlName="cellphone" class="input">
+                    </div>
+                    <div class="form-group">
+                        <label for="">Address</label>
+                        <input type="text" formControlName="address" class="input">
+                    </div>
+                    <div class="d-flex justify-content-center mt-4">
+                        <button type="submit" class="btn-submit">Guardar</button>
+                        <!--<button type="button" class="btn btn-outline-dark w-100" (click)="modal.close('Save click')">Cancelar</button>-->
+                    </div>
+                </form>
+            </div>
+            <div *ngIf="userdata.usertype == 'admin_assistant'">
+                <form action="" [formGroup]="formAssistant" (submit)="submit()" autocomplete="off">
+                    <div class="form-group d-none">
+                        <label for="">id</label>
+                        <input type="text" formControlName="assistantAdmId" class="input">
+                    </div>
+                    <div class="form-group">
+                        <label for="">UserName</label>
+                        <input type="text" formControlName="userName" class="input">
+                    </div>
+                    <div class="form-group">
+                        <label for="">LastName</label>
+                        <input type="text" formControlName="lastName" class="input">
+                    </div>
+                    <div class="row">
+                        <div class="col-lg">
+                            <div class="form-group">
+                                <label for="">Email</label>
+                                <input type="email" formControlName="email" class="input">
+                                <span class="d-block text-danger" *ngIf="this.formAssistant.get('email').errors?.email">Invalid Email</span>
+                            </div>
+                        </div>
+                        <div class="col-lg">
+                            <div class="form-group">
+                                <label for="">Password</label>
+                                <input type="password" formControlName="password" class="input">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="">CellPhone</label>
+                        <input type="text" formControlName="cellphone" class="input">
+                    </div>
+                    <div class="form-group">
+                        <label for="">Address</label>
+                        <input type="text" formControlName="address" class="input">
+                    </div>
+                    <div class="d-flex justify-content-center mt-4">
+                        <button type="submit" class="btn-submit">Save</button>
+                        <!--<button type="button" class="btn btn-outline-dark w-100" (click)="modal.close('Save click')">Cancelar</button>-->
+                    </div>
+                </form>
+            </div>
+            <div *ngIf="userdata.usertype == 'callcenter'">
+                <form action="" [formGroup]="formCallCenter" (submit)="submit()" autocomplete="off">
+                    <div class="form-group d-none">
+                        <label for="">id</label>
+                        <input type="text" formControlName="callCenterId" class="input">
+                    </div>
+                    <div class="form-group">
+                        <label for="">UserName</label>
+                        <input type="text" formControlName="userName" class="input">
+                    </div>
+                    <div class="form-group">
+                        <label for="">LastName</label>
+                        <input type="text" formControlName="lastName" class="input">
+                    </div>
+                    <div class="row">
+                        <div class="col-lg">
+                            <div class="form-group">
+                                <label for="">Email</label>
+                                <input type="email" formControlName="email" class="input">
+                                <span class="d-block text-danger" *ngIf="this.formCallCenter.get('email').errors?.email">Invalid Email</span>
+                            </div>
+                        </div>
+                        <div class="col-lg">
+                            <div class="form-group">
+                                <label for="">Password</label>
+                                <input type="password" formControlName="password" class="input">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg">
+                            <div class="form-group">
+                                <label for="">Working Hours</label>
+                                <input type="number" formControlName="workingHours" class="input">
+                            </div>
+                        </div>
+                        <div class="col-lg">
+                            <div class="form-group">
+                                <label for="">Monthly Salary</label>
+                                <input type="number" formControlName="monthlySalary" class="input">
+                            </div>
+                        </div>
+                        <div class="col-lg">
+                            <div class="form-group">
+                                <label for="">Extra Allocation</label>
+                                <input type="number" formControlName="extraAllocation" class="input">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="">CellPhone</label>
+                        <input type="number" formControlName="cellphone" class="input">
+                    </div>
+                    <div class="form-group">
+                        <label for="">Address</label>
+                        <input type="text" formControlName="address" class="input">
+                    </div>
+                    <div class="d-flex justify-content-center mt-4">
+                        <button type="submit" class="btn-submit">Save</button>
+                        <!--<button type="button" class="btn btn-outline-dark w-100" (click)="modal.close('Save click')">Cancelar</button>-->
+                    </div>
+                </form>
+            </div>
+            <div *ngIf="userdata.usertype == 'provider'">
+                <form action="" [formGroup]="formProvider" (submit)="submit()" autocomplete="off">
+                    <div class="form-group d-none">
+                        <label for="">id</label>
+                        <input type="text" formControlName="providersId" class="input">
+                    </div>
+                    <div class="form-group">
+                        <label for="">Company</label>
+                        <input type="text" formControlName="company" class="input">
+                    </div>
+                    <div class="form-group">
+                        <label for="">ServiceType</label>
+                        <input type="text" formControlName="serviceType" class="input">
+                    </div>
+                    <div class="row">
+                        <div class="col-lg">
+                            <div class="form-group">
+                                <label for="">Email</label>
+                                <input type="email" formControlName="email" class="input">
+                                <span class="d-block text-danger" *ngIf="this.formProvider.get('email').errors?.email">Invalid Email</span>
+                            </div>
+                        </div>
+                        <div class="col-lg">
+                            <div class="form-group">
+                                <label for="">Password</label>
+                                <input type="password" formControlName="password" class="input">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg">
+                            <div class="form-group">
+                                <label for="">Manager or Owner</label>
+                                <input type="text" formControlName="managerOrOwner" class="input">
+                            </div>
+                        </div>
+                        <div class="col-lg">
+                            <div class="form-group">
+                                <label for="">Operational Staff</label>
+                                <input type="text" formControlName="operationalStaff" class="input">
+                            </div>
+                        </div>
+                        <div class="col-lg">
+                            <div class="form-group">
+                                <label for="">Commission Established</label>
+                                <input type="number" formControlName="commissionEstablished" class="input">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="">CellPhone</label>
+                        <input type="number" formControlName="cellphone" class="input">
+                    </div>
+                    <div class="form-group">
+                        <label for="">Address</label>
+                        <input type="text" formControlName="address" class="input">
+                    </div>
+                    <div class="d-flex justify-content-center mt-4">
+                        <button type="submit" class="btn-submit">Save</button>
+                        <!--<button type="button" class="btn btn-outline-dark w-100" (click)="modal.close('Save click')">Cancelar</button>-->
+                    </div>
+                </form>
+            </div>
+            <div *ngIf="userdata.usertype == 'quote'">
+                <form action="" [formGroup]="formQuote" (submit)="submit()" autocomplete="off">
+                    <div class="form-group d-none">
+                        <label for="">id</label>
+                        <input type="text" formControlName="cotizadorId" class="input">
+                    </div>
+                    <div class="form-group">
+                        <label for="">UserName</label>
+                        <input type="text" formControlName="userName" class="input">
+                    </div>
+                    <div class="form-group">
+                        <label for="">LastName</label>
+                        <input type="text" formControlName="lastName" class="input">
+                    </div>
+                    <div class="row">
+                        <div class="col-lg">
+                            <div class="form-group">
+                                <label for="">Email</label>
+                                <input type="email" formControlName="email" class="input">
+                                <span class="d-block text-danger" *ngIf="this.formQuote.get('email').errors?.email">Invalid Email</span>
+                            </div>
+                        </div>
+                        <div class="col-lg">
+                            <div class="form-group">
+                                <label for="">Password</label>
+                                <input type="password" formControlName="password" class="input">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg">
+                            <div class="form-group">
+                                <label for="">Asignation</label>
+                                <input type="number" formControlName="asignation" class="input">
+                            </div>
+                        </div>
+                        <div class="col-lg">
+                            <div class="form-group">
+                                <label for="">Type</label>
+                                <select formControlName="type" class="input">
+                                    <option value="-1" selected>Select</option>
+                                    <option value="External">External</option>
+                                    <option value="Internal">Internal</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="">CellPhone</label>
+                        <input type="text" formControlName="cellphone" class="input">
+                    </div>
+                    <div class="form-group">
+                        <label for="">Address</label>
+                        <input type="text" formControlName="address" class="input">
+                    </div>
+                    <div class="d-flex justify-content-center mt-4">
+                        <button type="submit" class="btn-submit" [disabled]="this.formQuote.value.type == '-1'">Save</button>
+                        <!--<button type="button" class="btn btn-outline-dark w-100" (click)="modal.close('Save click')">Cancelar</button>-->
+                    </div>
+                </form>
+            </div>
+            <div *ngIf="userdata.usertype == 'admin'">
+                <form action="" [formGroup]="formAdmin" (submit)="submit()" autocomplete="off">
+                    <div class="form-group d-none">
+                        <label for="">id</label>
+                        <input type="text" formControlName="adminId" class="input">
+                    </div>
+                    <div class="form-group">
+                        <label for="">UserName</label>
+                        <input type="text" formControlName="userName" class="input">
+                    </div>
+                    <div class="form-group">
+                        <label for="">LastName</label>
+                        <input type="text" formControlName="lastName" class="input">
+                    </div>
+                    <div class="row">
+                        <div class="col-lg">
+                            <div class="form-group">
+                                <label for="">Email</label>
+                                <input type="email" formControlName="email" class="input">
+                                <span class="d-block text-danger" *ngIf="this.formAdmin.get('email').errors?.email">Invalid Email</span>
+                            </div>
+                        </div>
+                        <div class="col-lg">
+                            <div class="form-group">
+                                <label for="">Password</label>
+                                <input type="password" formControlName="password" class="input">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="">CellPhone</label>
+                        <input type="text" formControlName="cellphone" class="input">
+                    </div>
+                    <div class="form-group">
+                        <label for="">Address</label>
+                        <input type="text" formControlName="address" class="input">
+                    </div>
+                    <div class="d-flex justify-content-center mt-4">
+                        <button type="submit" class="btn-submit mr-3">Save</button>
+                        <button type="button" class="btn-submit cancel w-100" (click)="modal.close('Save click')">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</ng-template>
+<div class="ntf-bar" [ngClass]="{ 'active': visible_ntfs }">
+    <!--<span class="close-ntf-bar" [ngClass]="{ 'active': visible_ntfs }" (click)="visible_ntfs = !visible_ntfs"><i class="ti-close"></i></span>-->
+    <ul class="no-list p-3" *ngIf="user_notfs.length > 0 else emptyNotifications">
+        <li *ngFor="let n of user_notfs">
+            <div class="ntf-group">
+                <div class="row row-ntf">
+                    <div class="col pr-0">
+                        <span [innerHTML]="n.message"></span>
+                    </div>
+                    <div class="col-2">
+                        <span class="ntf-rem" (click)="removeNotification(n)"><i class="ti-trash"></i></span>
+                    </div>
+                </div>
+            </div>
+        </li>
+    </ul>
+    <ng-template #emptyNotifications>
+        <span class="empty-ntfs">You have no notification!</span>
+    </ng-template>
+</div>
+<div class="default-nav">
+    <div class="nav-brand">
+        <div class="row h-100">
+            <div class="col pl-0 pr-0">
+                <div class="brand-group">
+                    <img src="../../../../assets/img/logo.png" [routerLink]="['./home']" class="brand" alt="">
+                </div>
+            </div>
+            <div class="col-2 pl-0 pr-0">
+                <div class="left-bar-btn">
+                    <span class="btn-bar" (click)="visible_bar = !visible_bar"><i class="fas fa-bars"></i></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <ul class="nav-list">
+        <li class="nav-group">
+            <div class="notifications-group" (click)="visible_ntfs = !visible_ntfs">
+                <span class="notification-number">{{ user_notfs.length > 0 ? user_notfs.length:0 }}</span>
+                <span class="notification-icon"><i class="ti-bell"></i></span>
+            </div>
+        </li>
+        <li class="nav-group">
+            <div class="user-group">
+                <div class="nav-user-group">
+                    <img src="../../../../assets/img/profile/profile.png" class="nav-user-img center" alt="">
+                </div>
+                <span class="p-2 nav-user">{{ userdata.usertype == 'provider' ? userdata.userdata.company:userdata.userdata.userName }}</span>
+            </div>
+            <div class="user-options">
+                <ul class="no-list">
+                    <li class="user-option" (click)="editProfile(modal)">
+                        <span class="bps-icon"><i class="ti-user"></i></span> 
+                        <span>View Profile</span>
+                    </li>
+                    <li class="user-option logout" (click)="logout()">
+                        <span class="bps-icon"><i class="ti-layout-sidebar-left"></i></span>
+                        <span>Logout</span>
+                    </li>
+                </ul>
+            </div>
+        </li>
+    </ul>
+</div>
+<div class="bar-background" [ngClass]="{ 'active' : visible_bar }" (click)="visible_bar = !visible_bar"></div>
+<div class="left-bar" [ngClass]="{ 'active' : visible_bar }">
+    <div class="bar-body">
+        <div class="row p-3">
+            <div class="col-lg">
+                <div class="row mb-2">
+                    <div class="col-3 pr-0 pl-3">
+                        <div class="bar-profile-group center">
+                            <img src="../../../../assets/img/profile/profile.png" class="bar-profile center" alt="">
+                        </div>
+                    </div>
+                    <div class="col-8 w-100">
+                        <span class="bar-profile-name">{{ userdata.usertype == 'provider' ? userdata.userdata.company:userdata.userdata.userName }}</span>
+                        <div class="position-relative">
+                            <span class="bar-profile-options" data-toggle="collapse" data-target="#acc-details">More information</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="collapse bar-profile-settings" id="acc-details">
+                    <ul class="no-list">
+                        <li class="bp-option" (click)="editProfile(modal)">
+                            <span class="bps-icon"><i class="ti-user"></i></span> 
+                            <span>View Profile</span>
+                        </li>
+                        <li class="bp-option" (click)="visible_ntfs = !visible_ntfs">
+                            <span class="bps-icon"><i class="ti-bell"></i></span> 
+                            <span>View Notifications</span>
+                        </li>
+                        <li class="bp-option logout" (click)="logout()">
+                            <span class="bps-icon"><i class="ti-layout-sidebar-left"></i></span>
+                            <span>Logout</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="pl-3 pr-3 bar-options">
+            <h6 class="panel-title">Panel</h6>
+            <hr>
+            <ul class="no-list" id="options-list">
+                <div *ngIf="userdata.usertype == 'admin'">
+                    <li class="option-group">
+                        <div class="option" data-toggle="collapse" data-target="#admin-clients">
+                            <span class="option-icon"><i class="ti-user"></i></span>
+                            <span>Clients</span>
+                        </div>
+                        <div class="collapse dash-collapse" id="admin-clients" data-parent="#options-list">
+                            <ul class="no-list">
+                                <li class="s-option">
+                                    <a [routerLink]="['./clients']" class="option-item">Show Clients</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="option-group">
+                        <div class="option" data-toggle="collapse" data-target="#admin-assistants">
+                            <span class="option-icon"><i class="ti-user"></i></span>
+                            <span>Assistants</span>
+                        </div>
+                        <div class="collapse dash-collapse" id="admin-assistants" data-parent="#options-list">
+                            <ul class="no-list">
+                                <li class="s-option">
+                                    <a [routerLink]="['./admin/assistants']" class="option-item">Show Assistants</a>
+                                </li>
+                                <li class="s-option">
+                                    <a [routerLink]="['./admin/assistants/payments']" class="option-item">Assistant Payments</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="option-group">
+                        <div class="option" data-toggle="collapse" data-target="#admin-callcenter">
+                            <span class="option-icon"><i class="ti-user"></i></span>
+                            <span>Call Center</span>
+                        </div>
+                        <div class="collapse dash-collapse" id="admin-callcenter" data-parent="#options-list">
+                            <ul class="no-list">
+                                <li class="s-option">
+                                    <a [routerLink]="['./callcenters']" class="option-item">Show Call-Centers</a>
+                                </li>
+                                <li class="s-option">
+                                    <a [routerLink]="['./callcenters/payments']" class="option-item">Call Center Payments</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="option-group">
+                        <div class="option" data-toggle="collapse" data-target="#admin-provider">
+                            <span class="option-icon"><i class="ti-user"></i></span>
+                            <span>Providers</span>
+                        </div>
+                        <div class="collapse dash-collapse" id="admin-provider" data-parent="#options-list">
+                            <ul class="no-list">
+                                <li class="s-option">
+                                    <a [routerLink]="['./providers']" class="option-item">Show Providers</a>
+                                </li>
+                                <li class="s-option">
+                                    <a [routerLink]="['./providers/assign']" class="option-item">Assign Providers</a>
+                                </li>
+                                <li class="s-option">
+                                    <a [routerLink]="['./providers/payments']" class="option-item">Provider Payments</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="option-group">
+                        <div class="option" data-toggle="collapse" data-target="#admin-quote">
+                            <span class="option-icon"><i class="ti-user"></i></span>
+                            <span>Quote</span>
+                        </div>
+                        <div class="collapse dash-collapse" id="admin-quote" data-parent="#options-list">
+                            <ul class="no-list">
+                                <li class="s-option">
+                                    <a [routerLink]="['./quotes']" class="option-item">Show Quote</a>
+                                </li>
+                                <li class="s-option">
+                                    <a [routerLink]="['./quotes/assign']" class="option-item">Assign Quote</a>
+                                </li>
+                                <li class="s-option">
+                                    <a [routerLink]="['./quotes/list']" class="option-item">Show Quotes</a>
+                                </li>
+                                <li class="s-option">
+                                    <a [routerLink]="['./quotes/payments']" class="option-item">Contributor Payments</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="option-group">
+                        <div class="option" data-toggle="collapse" data-target="#admin_reports">
+                            <span class="option-icon"><i class="ti-user"></i></span>
+                            <span>Reports</span>
+                        </div>
+                        <div class="collapse dash-collapse" id="admin_reports" data-parent="#options-list">
+                            <ul class="no-list">
+                                <li class="s-option">
+                                    <a [routerLink]="['./providers/reports']" class="option-item">Provider</a>
+                                </li>
+                                <li class="s-option">
+                                    <a [routerLink]="['./clients/reports']" class="option-item">Clients</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                </div>
+                <div *ngIf="userdata.usertype == 'client'">
+                    <li class="option-group">
+                        <div class="option no-expand" [routerLink]="['./quotes/list']">
+                            <span class="option-icon"><i class="ti-user"></i></span>
+                            <span>Quotes</span>
+                        </div>
+                    </li>
+                </div>  
+                <div *ngIf="userdata.usertype == 'callcenter'">
+                    <li class="option-group">
+                        <div class="option no-expand" [routerLink]="['./providers']">
+                            <span class="option-icon"><i class="ti-user"></i></span>
+                            <span>Providers</span>
+                        </div>
+                    </li>
+                    <li class="option-group">
+                        <div class="option no-expand" [routerLink]="['./quotes/assign']">
+                            <span class="option-icon"><i class="ti-user"></i></span>
+                            <span>Quote</span>
+                        </div>
+                    </li>
+                    <li class="option-group">
+                        <div class="option no-expand" [routerLink]="['./clients']">
+                            <span class="option-icon"><i class="ti-user"></i></span>
+                            <span>Clients</span>
+                        </div>
+                    </li>
+                </div>
+                <div *ngIf="userdata.usertype == 'admin_assistant'">
+                    <li class="option-group">
+                        <div class="option no-expand" [routerLink]="['./clients']">
+                            <span class="option-icon"><i class="ti-user"></i></span>
+                            <span>Clients</span>
+                        </div>
+                    </li>
+                    <li class="option-group">
+                        <div class="option no-expand" [routerLink]="['./providers']">
+                            <span class="option-icon"><i class="ti-user"></i></span>
+                            <span>Providers</span>
+                        </div>
+                    </li>
+                    <li class="option-group">
+                        <div class="option" data-toggle="collapse" data-target="#assistant_payments">
+                            <span class="option-icon"><i class="ti-user"></i></span>
+                            <span>Payments</span>
+                        </div>
+                        <div class="collapse dash-collapse" id="assistant_payments" data-parent="#options-list">
+                            <ul class="no-list">
+                                <li class="s-option">
+                                    <a [routerLink]="['./callcenters/payments']" class="option-item">Call Center</a>
+                                </li>
+                                <li class="s-option">
+                                    <a [routerLink]="['./quotes/payments']" class="option-item">Quotes</a>
+                                </li>
+                                <li class="s-option">
+                                    <a [routerLink]="['./providers/payments']" class="option-item">Provider</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="option-group">
+                        <div class="option" data-toggle="collapse" data-target="#assistant_reports">
+                            <span class="option-icon"><i class="ti-user"></i></span>
+                            <span>Reports</span>
+                        </div>
+                        <div class="collapse dash-collapse" id="assistant_reports" data-parent="#options-list">
+                            <ul class="no-list">
+                                <li class="s-option">
+                                    <a [routerLink]="['./providers/reports']" class="option-item">Provider</a>
+                                </li>
+                                <li class="s-option">
+                                    <a [routerLink]="['./clients/reports']" class="option-item">Clients</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                </div>
+                <div *ngIf="userdata.usertype == 'quote'">
+                    <li class="option-group">
+                        <div class="option no-expand" [routerLink]="['./quotes/list']">
+                            <span class="option-icon"><i class="ti-user"></i></span>
+                            <span>Quotes</span>
+                        </div>
+                    </li>
+                </div>
+                <div *ngIf="userdata.usertype == 'provider'">
+
+                </div>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="container-fluid">
+    <div class="dash-content" [ngClass]="{ 'active': visible_bar }">
+        <router-outlet></router-outlet>
+    </div>
+</div>

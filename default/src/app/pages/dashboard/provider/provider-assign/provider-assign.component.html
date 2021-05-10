@@ -1,0 +1,90 @@
+<ng-template #userinfo let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Client Assigned</h4>
+        <button type="button" class="modal-close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true"><i class="ti-close"></i></span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="client-img">
+            <span class="clienticon"><i class="fas fa-user"></i></span>
+        </div>
+        <form action="">
+            <div class="form-group">
+                <label>UserName</label>
+                <input type="text" class="input" [(ngModel)]="formclient.userName" [ngModelOptions]="{ standalone: true }" disabled>
+            </div>
+            <div class="form-group">
+                <label>LastName</label>
+                <input type="text" class="input" [(ngModel)]="formclient.lastName" [ngModelOptions]="{ standalone: true }" disabled>
+            </div>
+        </form>
+    </div>
+</ng-template>
+<ng-template #modal let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Select a client</h4>
+        <button type="button" class="modal-close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true"><i class="ti-close"></i></span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="form-group">
+            <input type="text" class="input" placeholder="search client with username" (input)="searchclient($event)">
+        </div>
+        <table class="table user-data">
+            <thead>
+                <tr>
+                    <th>UserName</th>
+                    <th>Email</th>
+                    <th>CellPhone</th>
+                    <th>Address</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody *ngIf="client_data">
+                <tr *ngFor="let c of client_data">
+                    <td>{{ c.userName }}</td>
+                    <td>{{ c.email }}</td>
+                    <td>{{ c.cellphone }}</td>
+                    <td>{{ c.address }}</td>
+                    <td><button class="btn-assign" (click)="select($event, c)">Select</button></td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="form-group">
+            <label>State</label>
+            <select class="input" [(ngModel)]="assign_state">
+                <option value="-1" selected>Select</option>
+                <option value="1">Concluded</option>
+                <option value="0">Unfinished</option>
+            </select>
+        </div>
+        <div class="mt-4">
+            <button class="btn-assign w-100" (click)="assignclient()" [disabled]="assign_state == '-1'">Assign</button>
+        </div>
+    </div>
+</ng-template>
+<table class="table user-data">
+    <thead>
+        <th>Company</th>
+        <th>Address</th>
+        <th>Email</th>
+        <th>CellPhone</th>
+        <th>Manager or Owner</th>
+        <th>Actions</th>
+    </thead>
+    <tbody *ngIf="data">
+        <tr *ngFor="let d of data">
+            <td>{{ d.company }}</td>
+            <td>{{ d.address }}</td>
+            <td>{{ d.email }}</td>
+            <td>{{ d.cellphone }}</td>
+            <td>{{ d.managerOrOwner }}</td>
+            <td>
+                <button class="btn-assign mr-2" [disabled]="!checkassign(d.providersId)" (click)="showuserinfo(userinfo, d)"><i class="ti-eye"></i></button>
+                <button class="btn-assign" (click)="assign(modal, d, $event)" [disabled]="checkassign(d.providersId)">Assign</button>
+            </td>
+        </tr>
+    </tbody>
+</table>

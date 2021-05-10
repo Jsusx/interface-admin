@@ -1,0 +1,148 @@
+/*
+MODAL
+*/
+
+.modal-header{
+    background-color: #303549;
+    color: white;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.modal-title{
+    font-size: 20px;
+    width: 100%;
+    text-align: center;
+}
+
+.modal-close{
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 30px;
+    text-align: center;
+    height: 30px;
+    background-color: inherit;
+    transition: 0.5s;
+}
+
+.modal-close:hover{
+    color: #ff4848;
+}
+
+
+.input{
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    outline: none;
+    transition: 0.5s;
+}
+
+.input:focus, .input:hover, .input:active{
+    border: 1px solid #303549;
+}
+
+
+.btn-submit{
+    background-color: #303549;
+    color: white;
+    border: none;
+    outline: none;
+    width: 100%;
+    padding: 8px;
+    transition: 0.5s;
+}
+
+.btn-submit:hover{
+    background-color: #404761;
+}
+
+/*
+TABLE
+*/
+.user-data{
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, .2);
+}
+
+.user-data thead{
+    background-color: #303549;
+    color: white;
+    text-align: center;
+}
+.user-data thead th{
+    border-bottom: none;
+}
+
+.user-data thead th:first-child{
+    border-radius: 5px 0 0 0;
+}
+
+.user-data thead th:last-child{
+    border-radius: 0 5px 0 0;
+}
+
+.user-data tbody td{
+    background-color: white;
+    text-align: center;
+}
+
+.btn-actions{
+    background-color: inherit;
+    color: #303549;
+    border: none;
+    outline: none;
+    margin-right: 5px;
+}
+
+.btn-actions.delete{
+    color: #ff4848;
+}
+
+
+.btn-new{
+    background-color: #303549;
+    color: white;
+    border: none;
+    outline: none;
+    padding: 8px;
+    transition: 0.5s;
+    margin-bottom: 15px;
+}
+
+.btn-new:hover{
+    background-color: #404761;
+}
+
+/*
+BTN
+*/
+
+.btn-custom{
+    background-color: #303549;
+    color: white;
+    border: none;
+    outline: none;
+    padding: 8px;
+    transition: 0.5s;
+    margin-bottom: 15px;
+}
+
+.btn-custom:disabled{
+    background-color: #b6b6b6;
+    color: white;
+}
+
+.btn-custom:disabled:hover{
+    background-color: #929292;
+    color: white;
+}
+
+.btn-custom.selected{
+    background-color: #48ffa3;
+}
+
+.btn-custom:hover{
+    background-color: #404761;
+}

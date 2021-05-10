@@ -1,0 +1,81 @@
+<ng-template #modal let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">{{ modal_title }}</h4>
+        <button type="button" class="modal-close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true"><i class="ti-close"></i></span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <table class="table user-data" *ngIf="prov_data.length != 0 else concluded">
+            <thead>
+                <tr>
+                    <th>Compañia</th>
+                    <th>Correo</th>
+                    <th>Telefono</th>
+                    <th>Direccion</th>
+                    <th>Manager u Owner</th>
+                    <th>Staff Operacional</th>
+                    <th>Comision Establecida</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let c of prov_data">
+                    <td>{{ c.company }}</td>
+                    <td>{{ c.email }}</td>
+                    <td>{{ c.cellphone }}</td>
+                    <td>{{ c.address }}</td>
+                    <td>{{ c.managerOrOwner }}</td>
+                    <td>{{ c.operationalStaff }}</td>
+                    <td>{{ c.commissionEstablished }}</td>
+                </tr>
+            </tbody>
+        </table>
+        <ng-template #concluded>
+            <table class="table user-data" *ngIf="prov_concluded_data.length != 0 else empty_data">
+                <thead>
+                    <tr>
+                        <th>Compañia</th>
+                        <th>Correo</th>
+                        <th>Telefono</th>
+                        <th>Direccion</th>
+                        <th>Manager u Owner</th>
+                        <th>Staff Operacional</th>
+                        <th>Comision Establecida</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let c of prov_concluded_data">
+                        <td>{{ c.company }}</td>
+                        <td>{{ c.email }}</td>
+                        <td>{{ c.cellphone }}</td>
+                        <td>{{ c.address }}</td>
+                        <td>{{ c.managerOrOwner }}</td>
+                        <td>{{ c.operationalStaff }}</td>
+                        <td>{{ c.commissionEstablished }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </ng-template>
+        <ng-template #empty_data>
+            <hr>
+            <h5 class="text-center empty-text">No se han registrado datos</h5>
+            <hr>
+        </ng-template>
+    </div>
+</ng-template>
+<div class="row mt-3">
+    <div class="col-lg-6">
+        <div class="data-stats mr-4" (click)="assignedproviders(modal, 'assigned')">
+            <span class="stats-icon"><i class="fas fa-user"></i></span>
+            <span class="stats-title">Proveedores Asignados</span>
+            <span class="stats-number">{{ prov_assigneds }}</span>
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="data-stats" (click)="assignedproviders(modal, 'concluded')">
+            <span class="stats-icon"><i class="fas fa-thumbs-up"></i></span>
+            <span class="stats-title">Servicio Concluido</span>
+            <span class="stats-number">{{ prov_concluded }}</span>
+        </div>
+    </div>
+</div>

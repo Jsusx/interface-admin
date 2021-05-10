@@ -1,0 +1,72 @@
+<ng-template #modal let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Select a client</h4>
+        <button type="button" class="modal-close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true"><i class="ti-close"></i></span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="form-group">
+            <input type="text" class="input" placeholder="search client with username" (input)="searchclient($event)">
+        </div>
+        <table class="table user-data">
+            <thead>
+                <tr>
+                    <th>UserName</th>
+                    <th>Email</th>
+                    <th>CellPhone</th>
+                    <th>Address</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody *ngIf="client_data">
+                <tr *ngFor="let c of client_data">
+                    <td>{{ c.userName }}</td>
+                    <td>{{ c.email }}</td>
+                    <td>{{ c.cellphone }}</td>
+                    <td>{{ c.address }}</td>
+                    <td><button class="btn-assign" (click)="select($event, c)">Select</button></td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="mt-4">
+            <button class="btn-assign w-100" (click)="assignclient()">Done</button>
+        </div>
+    </div>
+</ng-template>
+<div class="box">
+    <div class="box-settings">
+        <h3 class="text-center">Edit Quote</h3>
+        <div class="row mt-4">
+            <div class="col-lg w-100">
+                <div class="form-group">
+                    <label for=""></label>
+                    <input type="text" class="input" placeholder="Select a client" [(ngModel)]="client_username" [ngModelOptions]="{ standalone: true }" disabled>
+                </div>
+            </div>
+            <div class="col-lg-2">
+                <button class="btn-custom w-100" (click)="selectclient(modal)">Select</button>
+            </div>
+        </div>
+        <div class="drag-zone">
+            <div class="file-group">
+                <div class="file-img">
+                    <span class="file-img-icon"><i class="ti-file" [class]="{ 'ti-file': file.type, 'ti-image': !file.type }"></i></span>
+                </div>
+                <div class="file-body">
+                    <span class="file-name">{{ file.name }}</span>
+                </div>
+            </div>
+            <span class="drop-icon"><i class="ti-upload"></i></span>
+        </div>
+        <div class="d-none">
+            <form action="">
+                <input type="file" id="files">
+            </form>
+        </div>
+        <div class="d-flex justify-content-center mt-4">
+            <button class="btn-custom w-100 mr-3" (click)="saveQuote()" [disabled]="!changes.file && !changes.client">{{ changes.file || changes.client ? 'Save':'Without Changes' }}</button>
+            <button class="btn-custom cancel w-100" (click)="back()">Cancel and Back</button>
+        </div>
+    </div>
+</div>

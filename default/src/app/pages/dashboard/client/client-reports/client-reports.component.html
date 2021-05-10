@@ -1,0 +1,107 @@
+<div class="search-group">
+    <span class="search-title">Client Filter</span>
+    <div class="p-3">
+        <div class="row">
+            <div class="col">
+                <div class="form-group">
+                    <label for="">State</label>
+                    <select [(ngModel)]="client.state" [disabled]="client.zone != '-1' || client.ad != '-1'" [ngModelOptions]="{ standalone: true }" (change)="filter('state')" class="input">
+                        <option value="-1" selected>Select the client state</option>
+                        <option value="Marketing">Marketing</option>
+                        <option value="Assigned">Assigned</option>
+                        <option value="In Process">In Process</option>
+                        <option value="Concluded">Concluded</option>
+                        <option value="Not Worked">Not Worked</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-group">
+                    <label for="">Zone</label>
+                    <select [(ngModel)]="client.zone" [disabled]="client.state != '-1' || client.ad != '-1'" [ngModelOptions]="{ standalone: true }" (change)="filter('zone')" class="input">
+                        <option value="-1" selected>Select the client zone</option>
+                        <option value="West Palm Beach">West Palm Beach</option>
+                        <option value="Broward">Broward</option>
+                        <option value="Miami Dade">Miami Dade</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-group">
+                    <label for="">Advertising Type</label>
+                    <select [(ngModel)]="client.ad" [disabled]="client.state != '-1' || client.zone != '-1'" [ngModelOptions]="{ standalone: true }" (change)="filter('ad')" class="input">
+                        <option value="-1" selected>Select the client advertising type</option>
+                        <option value="impactWindow">Impact Window</option>
+                        <option value="panelSolar">Panel Solar</option>
+                        <option value="marmol">Marmol</option>
+                        <option value="remodeling">Remodeling</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="d-flex justify-content-end">
+            <button class="btn-custom mt-3" (click)="resetFilter()">Reset Filter</button>
+        </div>
+    </div>
+</div>
+<table class="table user-data" *ngIf="data.length > 0 else nodata">
+    <thead>
+        <th>Email</th>
+        <th>UserName</th>
+        <th>LastName</th>
+        <th>CellPhone</th>
+        <th>Address</th>
+        <th class="bg yellow light">IP</th>
+        <th class="bg green">PS</th>
+        <th class="bg yellow">MM</th>
+        <th class="bg blue">RE</th>
+        <th>Zone</th>
+        <th>State</th>
+        <th>Account State</th>
+    </thead>
+    <tbody>
+        <tr *ngFor="let d of data">
+            <td>{{ d.email }}</td>
+            <td>{{ d.userName }}</td>
+            <td>{{ d.lastName }}</td>
+            <td>{{ d.cellphone }}</td>
+            <td>{{ d.address }}</td>
+            <td>
+                <div>
+                    <div class="switch-group" (click)="changeState($event)">
+                        <input type="checkbox" class="input-switch" [checked]="d.impactWindow == 1" disabled>
+                        <span class="switch-content"></span>
+                    </div>
+                </div>
+            </td>
+            <td>
+                <div class="switch-group" (click)="changeState($event)">
+                    <input type="checkbox" class="input-switch" [checked]="d.panelSolar == 1" disabled>
+                    <span class="switch-content"></span>
+                </div>
+            </td>
+            <td>
+                <div class="switch-group" (click)="changeState($event)">
+                    <input type="checkbox" class="input-switch" [checked]="d.marmol == 1" disabled>
+                    <span class="switch-content"></span>
+                </div>
+            </td>
+            <td>
+                <div class="switch-group" (click)="changeState($event)">
+                    <input type="checkbox" class="input-switch" [checked]="d.remodeling == 1" disabled>
+                    <span class="switch-content"></span>
+                </div>
+            </td>
+            <td>{{ d.zone }}</td>
+            <td>{{ d.state }}</td>
+            <td>{{ d.acc_state == '1' ? 'Active':'Inactive' }}</td>
+        </tr>
+    </tbody>
+</table>
+<ng-template #nodata>
+    <div class="data-empty">
+        <hr>
+        <h4 class="empty-text">No data found</h4>
+        <hr>
+    </div>
+</ng-template>
